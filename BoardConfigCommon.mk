@@ -87,13 +87,13 @@ BOARD_KERNEL_TAGS_OFFSET := 0x00000100
 BOARD_RAMDISK_OFFSET := 0x01000000
 
 BOARD_BOOT_HEADER_VERSION := 2
-BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
+BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION) --dtb=out/target/product/miatoll/dtb.img
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true
 
 TARGET_KERNEL_ADDITIONAL_FLAGS += LD=ld.lld AR=llvm-ar NM=llvm-nm STRIP=llvm-strip OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump
 TARGET_KERNEL_CLANG_COMPILE := true
 TARGET_KERNEL_CONFIG := cust_defconfig
-TARGET_KERNEL_SOURCE := kernel/xiaomi/sm6250
+TARGET_KERNEL_SOURCE := kernel/xiaomi/sm6250_ether
 
 BOARD_KERNEL_CMDLINE += androidboot.console=ttyMSM0
 BOARD_KERNEL_CMDLINE += androidboot.hardware=qcom
@@ -109,6 +109,8 @@ BOARD_KERNEL_CMDLINE += msm_rtb.filter=0x237
 BOARD_KERNEL_CMDLINE += service_locator.enable=1
 BOARD_KERNEL_CMDLINE += swiotlb=1
 BOARD_KERNEL_CMDLINE += video=vfb:640x400,bpp=32,memsize=3072000
+BOARD_KERNEL_CMDLINE += selinux=1
+BOARD_KERNEL_CMDLINE += audit=0
 
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 134217728
