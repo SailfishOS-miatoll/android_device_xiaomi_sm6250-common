@@ -89,10 +89,15 @@ BOARD_RAMDISK_OFFSET := 0x01000000
 BOARD_BOOT_HEADER_VERSION := 2
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION) --dtb=out/target/product/miatoll/dtb.img
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true
+BOARD_RAMDISK_USE_LZ4 := true
+
 
 TARGET_KERNEL_ADDITIONAL_FLAGS += LD=ld.lld AR=llvm-ar NM=llvm-nm STRIP=llvm-strip OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump
 TARGET_KERNEL_CLANG_COMPILE := true
-TARGET_KERNEL_CONFIG := stock_defconfig
+TARGET_KERNEL_CLANG_PATH := /hadk/src/hybris-18.1/prebuilts/yuki-clang
+TARGET_KERNEL_CLANG_VERSION := 18
+KERNEL_CLANG_TRIPLE := aarch64-linux-gnu-
+TARGET_KERNEL_CONFIG := vendor/xiaomi/miatoll_defconfig
 
 TARGET_KERNEL_SOURCE := kernel/xiaomi/kernel_xiaomi_sm6250
 
@@ -112,6 +117,7 @@ BOARD_KERNEL_CMDLINE += swiotlb=1
 BOARD_KERNEL_CMDLINE += video=vfb:640x400,bpp=32,memsize=3072000
 BOARD_KERNEL_CMDLINE += selinux=1
 BOARD_KERNEL_CMDLINE += audit=0
+BOARD_KERNEL_CMDLINE += elevator=maple
 
 NEED_KERNEL_MODULE_SYSTEM := true
 
